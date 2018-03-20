@@ -1,0 +1,50 @@
+Criar chave release no React-Native
+
+1- Editar o arquivo android/app/build.gradle
+
+    signingConfigs {
+        release {
+            if (System.getenv('LXKEYSTORE')) {
+                storeFile file(System.getenv('LXKEYSTORE'))
+                storePassword System.getenv('LXKEYPASSWD')
+                keyAlias System.getenv('LXKEYALIAS')
+                keyPassword System.getenv('LXKEYPASSWD')
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
+        }
+    }
+
+2- Criar a chave com as senhas
+keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+
+3- Será gerando um arquivo na home com o nome "my-key"
+
+4- Mover o arquivo gerando para o diretório
+	android/app
+
+
+Para gerar o APK release
+
+1- Limpar o diretorio
+cd android/
+rm -r build
+./gradlew clean
+
+2- Exportar as variaveis criadas
+export LXKEYALIAS={KEY_ALIAS}
+export LXKEYPASSWD={KEY_PASSWD}
+export LXKEYSTORE={KEY_STORE}.keystore
+
+3- Gerar APK
+cd android/
+./gradlew assembleRelease
+
+4- Gerar APK e instalar no dispositivo
+./gradlew installRelease
+
