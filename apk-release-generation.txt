@@ -48,3 +48,6 @@ cd android/
 4- Gerar APK e instalar no dispositivo
 ./gradlew installRelease
 
+** se der erro
+adb uninstall "com.{NOMEDOAPP}"
+
