@@ -1,0 +1,16 @@
+Padrão do nome do package no android
+android/app/src/main/java/br/com/{nomeapp}/mobile
+
+Passo a passo
+- Crie as pastas br e mobile
+- Acesse o arquivo MainActivity.java:
+	* Altere o package para br.com.{nomeapp}.mobile;
+- Acesse o arquivo MainApplication.java:
+	* Altere o package para br.com.{nomeapp}.mobile;
+- Acesse o arquivo AndroidManifest.xml:
+	* Altere o package para br.com.{nomeapp}.mobile;
+- Acesse o arquivo android/app/build.gradle:
+	* Altere o applicationId para br.com.{nomeapp}.mobile;
+- Acesse o arquivo BUCK (opicional):
+	* Em android_build_config -> altere o package para br.com.{nomeapp}.mobile;
+	* Em android_resource -> altere o package para br.com.{nomeapp}.mobile;
